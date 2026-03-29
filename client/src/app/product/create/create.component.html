@@ -1,0 +1,65 @@
+<div class="w-full mx-auto p-8">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <div class="space-y-1">
+        <label class="block text-sm font-semibold text-slate-700">SKU / Product Code*</label>
+        <input type="text" formControlName="sku"
+               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all uppercase"
+               placeholder="e.g. JGT-WAG-001">
+        <p *ngIf="productForm.get('sku')?.touched && productForm.get('sku')?.invalid" class="text-xs text-red-500">กรุณาระบุรหัสสินค้า</p>
+      </div>
+
+      <div class="space-y-1">
+        <label class="block text-sm font-semibold text-slate-700">Product Name*</label>
+        <input type="text" formControlName="name"
+               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all"
+               placeholder="ระบุชื่อสินค้า">
+      </div>
+
+      <div class="space-y-1">
+        <label class="block text-sm font-semibold text-slate-700">Category</label>
+        <select formControlName="category" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none">
+          <option value="">Select Category</option>
+          <option value="Meat">Meat & Poultry</option>
+          <option value="Dairy">Dairy Products</option>
+          <option value="Dry">Dry Goods</option>
+        </select>
+      </div>
+
+      <div class="space-y-1">
+        <label class="block text-sm font-semibold text-slate-700">Unit of Measure*</label>
+        <select formControlName="unit" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none">
+          <option value="">Select Unit</option>
+          <option value="Kg">Kilogram (Kg)</option>
+          <option value="Bottle">Bottle</option>
+          <option value="Box">Box</option>
+          <option value="Pack">Pack</option>
+        </select>
+      </div>
+
+      <div class="space-y-1">
+        <label class="block text-sm font-semibold text-slate-700">Standard Price (THB)*</label>
+        <input type="number" formControlName="price"
+               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all">
+      </div>
+
+      <div class="space-y-1">
+        <label class="block text-sm font-semibold text-slate-700">Brand / Origin</label>
+        <input type="text" formControlName="brand"
+               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition-all"
+               placeholder="e.g. Hokkaido, Wagyu A5">
+      </div>
+    </div>
+
+    <div class="flex items-center justify-end gap-4">
+      <button type="button" (click)="router.navigate(['/dashboard/inventory'])" class="text-slate-500 font-semibold px-6 hover:text-slate-700 transition-colors">
+        Cancel
+      </button>
+      <button type="submit"
+              class="bg-slate-900 text-white px-10 py-3 rounded-2xl font-bold shadow-lg hover:bg-slate-800 active:scale-95 transition-all">
+        Create Product Master
+      </button>
+    </div>
+  </form>
+</div>

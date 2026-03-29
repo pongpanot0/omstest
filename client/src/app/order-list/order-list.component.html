@@ -1,0 +1,25 @@
+<div *appHasRole="'CUSTOMER'" class="space-y-6">
+
+  <div class="mt-5 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <div class="p-4 border-b bg-gray-50/50 flex justify-between items-center">
+      <h3 class="font-bold text-gray-800 text-lg">รายการสั่งซื้อล่าสุด</h3>
+
+    </div>
+    <app-table [data]="ordersCustomer" [columns]="columnsCustomer" [actions]="actionsCustomer"
+    [totalItems]="totalItems"   [pageSize]="pageSize"       [currentPage]="currentPage" (pageChange)="onPageChange($event)"
+    >
+    </app-table>
+  </div>
+</div>
+<div *appHasRole="'ADMIN'">
+
+  <div class="mt-5 w-full">
+    <div class="w-full">
+      <app-table [data]="orders" [columns]="columns" [actions]="actions"
+
+      [totalItems]="totalItems"   [pageSize]="pageSize"       [currentPage]="currentPage" (pageChange)="onPageChange($event)"
+      >
+      </app-table>
+    </div>
+  </div>
+</div>

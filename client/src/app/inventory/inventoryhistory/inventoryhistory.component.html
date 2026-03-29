@@ -1,0 +1,62 @@
+<div class=" mx-auto space-y-6">
+
+  <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex justify-between items-end">
+    <div>
+      <h1 class="text-2xl font-bold text-slate-800">Stock Movement History</h1>
+      <p class="text-slate-500 font-medium">{{ productName }} <span class="text-slate-300 ml-2">| ID: {{ productId }}</span></p>
+    </div>
+    <div class="text-right">
+      <p class="text-xs text-slate-400 uppercase font-bold tracking-widest">Current Available</p>
+      <p class="text-3xl font-mono font-bold text-red-600">{{currentStock}}</p>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+    <table class="w-full text-left border-collapse">
+      <thead class="bg-slate-50 text-slate-500 text-[11px] uppercase tracking-wider">
+        <tr>
+          <th class="p-4 font-semibold">Date & Time</th>
+          <th class="p-4 font-semibold">Transaction Type</th>
+          <th class="p-4 font-semibold text-right">Change</th>
+          <th class="p-4 font-semibold text-right">Balance</th>
+          <th class="p-4 font-semibold">Performed By</th>
+          <th class="p-4 font-semibold">Notes</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        <tr *ngFor="let m of movements" class="hover:bg-slate-50/50 transition-colors">
+          <td class="p-4">
+            <p class="text-sm font-medium text-slate-700">{{ m.date | date:'dd MMM yyyy' }}</p>
+            <p class="text-[10px] text-slate-400">{{ m.date | date:'HH:mm:ss' }}</p>
+          </td>
+          <td class="p-4">
+            <span [className]="'px-2 py-1 rounded-md text-[10px] font-bold ' + getStatusClass(m.type)">
+              {{ m.type }}
+            </span>
+            <p class="text-xs mt-1 text-slate-500">{{ m.reason }}</p>
+          </td>
+          <td class="p-4 text-right">
+            <span [class]="m.amount > 0 ? 'text-green-600 font-bold' : 'text-red-600 font-bold'">
+              {{ m.amount > 0 ? '+' : '' }}{{ m.amount }}
+            </span>
+          </td>
+          <td class="p-4 text-right font-mono font-bold text-slate-700">
+            {{ m.balance |number }}
+          </td>
+          <td class="p-4 text-sm text-slate-600">
+            {{ m.user }}
+          </td>
+          <td class="p-4 text-xs text-slate-400 italic max-w-xs truncate">
+            {{ m.note || '-' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="movements.length === 0" class="p-20 text-center">
+      <p class="text-slate-400 italic">No movement recorded for this product.</p>
+    </div>
+  </div>
+
+
+</div>

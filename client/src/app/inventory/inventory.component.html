@@ -1,0 +1,26 @@
+<div *appHasRole="'ADMIN'">
+
+  <div class="mt-5 w-full ">
+    <div class="flex justify-end gap-5">
+      <button
+        class="bg-blue-500 p-2 rounded-lg text-white"
+        (click)="routerPage('product')"
+      >
+        เพิ่ม Product
+      </button>
+      <button
+        class="bg-blue-500 p-2 rounded-lg text-white"
+        (click)="routerPage('inventory')"
+      >
+        เพิ่ม Stock
+      </button>
+    </div>
+
+    <div class="w-full mt-2">
+      <app-table [data]="stocks" [columns]="columns" [actions]="actions"
+      [totalItems]="totalItems"   [pageSize]="limit"       [currentPage]="page" (pageChange)="onPageChange($event)"
+      >
+      </app-table>
+    </div>
+  </div>
+</div>

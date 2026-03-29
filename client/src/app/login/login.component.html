@@ -1,0 +1,55 @@
+<div class="min-h-screen flex items-center justify-center bg-slate-50 p-4">
+  <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
+
+    <div class="p-8 text-center bg-slate-900 text-white">
+      <h1 class="text-3xl font-bold tracking-tight"> <span class="text-red-500">OMS</span></h1>
+      <p class="mt-2 text-slate-400 text-sm">
+        {{ isLoginMode ? 'Welcome back! Please enter your details.' : 'Create an account to get started.' }}
+      </p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="p-8 space-y-5">
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Username</label>
+        <input type="text" name="username" [(ngModel)]="authData.username" required
+          class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all"
+          placeholder="e.g. admin or pongpanot">
+      </div>
+
+      <div *ngIf="!isLoginMode" class="animate-in fade-in slide-in-from-top-2 duration-300">
+        <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+        <input type="email" name="email" [(ngModel)]="authData.email"
+          class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all"
+          placeholder="your@email.com">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+        <input type="password" name="password" [(ngModel)]="authData.password" required
+          class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all"
+          placeholder="••••••••">
+      </div>
+
+      <button type="submit"
+        class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-lg transition-colors shadow-lg shadow-red-200 active:scale-[0.98]">
+        {{ isLoginMode ? 'Sign In' : 'Create Account' }}
+      </button>
+
+      <div class="text-center mt-6">
+        <p class="text-sm text-slate-500">
+          {{ isLoginMode ? "Don't have an account?" : "Already have an account?" }}
+          <button type="button" (click)="toggleMode()"
+            class="text-red-600 font-semibold hover:underline focus:outline-none ml-1">
+            {{ isLoginMode ? 'Register now' : 'Back to Login' }}
+          </button>
+        </p>
+      </div>
+
+    </form>
+
+    <div class="px-8 pb-8 text-center text-[10px] text-slate-400 uppercase tracking-widest">
+      Internal Management System v1.0
+    </div>
+  </div>
+</div>

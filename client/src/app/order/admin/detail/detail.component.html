@@ -1,0 +1,116 @@
+<div class="mx-auto p-6 space-y-6">
+  <div
+    class="bg-slate-900 text-white p-6 rounded-3xl flex flex-col md:flex-row justify-between items-center gap-4 shadow-xl"
+  >
+    <div>
+      <p class="text-[10px] uppercase font-bold text-slate-400 mb-1">
+        Current Status
+      </p>
+      <div class="flex items-center gap-3">
+        <span class="text-2xl font-black">{{ orderData.status }}</span>
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      <button
+        *ngIf="orderData.status === 'Pending'"
+        (click)="updateStatus('Processing')"
+        class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 rounded-xl font-bold text-xs transition-all"
+      >
+        Start Processing
+      </button>
+
+      <button
+        *ngIf="orderData.status === 'Processing'"
+        (click)="updateStatus('Shipped')"
+        class="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 rounded-xl font-bold text-xs transition-all"
+      >
+        Mark as Shipped
+      </button>
+
+      <button
+        *ngIf="orderData.status === 'Shipped'"
+        (click)="updateStatus('Delivered')"
+        class="px-5 py-2.5 bg-green-600 hover:bg-green-700 rounded-xl font-bold text-xs transition-all"
+      >
+        Mark as Delivered
+      </button>
+
+      <button
+        *ngIf="
+          orderData.status !== 'Delivered' && orderData.status !== 'Cancelled'
+        "
+        (click)="cancelOrder()"
+        class="px-5 py-2.5 bg-white/10 hover:bg-red-600 text-white rounded-xl font-bold text-xs transition-all border border-white/20"
+      >
+        Cancel Order
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="lg:col-span-2 space-y-6">
+      <div
+        class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden"
+      >
+        <div class="p-6 border-b flex justify-between items-center">
+          <h2 class="font-bold text-slate-800">Order Items</h2>
+          <span class="text-xs font-mono text-slate-400">{{
+            orderData.id
+          }}</span>
+        </div>
+        <table class="w-full">
+          <tbody class="divide-y divide-slate-50">
+            <tr *ngFor="let item of orderData.items">
+              <td class="p-4">
+                <div class="font-bold text-sm text-slate-800">
+                  {{ item.name }}
+                </div>
+                <div class="text-[10px] text-slate-400">
+                  Qty: {{ item.quantity }}
+                </div>
+              </td>
+              <td class="p-4 text-right font-bold text-slate-800">
+                {{ item.price * item.quantity | number }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+        <h3
+          class="text-xs font-bold text-slate-400 uppercase mb-4 tracking-widest"
+        >
+          Customer
+        </h3>
+        <p class="font-bold text-slate-800">{{ orderData.customerName }}</p>
+        <p class="text-xs text-slate-500 mt-1 italic">Customer ID: {{orderData.userId}}</p>
+        <hr class="my-4" />
+        <h3
+          class="text-xs font-bold text-slate-400 uppercase mb-2 tracking-widest"
+        >
+          Shipping To
+        </h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          {{ orderData.shippingAddressName }}
+          {{ orderData.shippingFullAddress }}
+        </p>
+      </div>
+
+      <div class="bg-red-50 p-6 rounded-3xl border border-red-100">
+        <div class="flex justify-between items-end">
+          <span class="text-[10px] font-bold text-red-800 uppercase"
+            >Grand Total</span
+          >
+          <span class="text-2xl font-black text-red-600"
+            >{{ orderData.total | number }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

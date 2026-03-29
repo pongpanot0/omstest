@@ -1,0 +1,97 @@
+<div class="mx-auto p-6 space-y-6">
+  <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+    <div class="flex justify-between items-center mb-10">
+      <div>
+        <h2 class="text-xl font-bold text-slate-800">Track Order</h2>
+        <p class="text-xs text-slate-400">
+          อัปเดตล่าสุด: 28 มีนาคม 2026, 20:45
+        </p>
+      </div>
+      <span
+        class="px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-bold uppercase tracking-widest"
+      >
+        In Transit
+      </span>
+    </div>
+
+    <div class="relative flex justify-between">
+      <div class="absolute top-5 left-0 w-full h-0.5 bg-slate-100 -z-0"></div>
+      <div
+        class="absolute top-5 left-0 h-0.5 bg-red-600 -z-0 transition-all duration-500"
+        [style.width.%]="66"
+      ></div>
+
+      <div class="relative z-10 text-center">
+        <div
+          class="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg shadow-red-100"
+        >
+          <span class="material-symbols-outlined text-sm">assignment</span>
+        </div>
+        <p class="text-[10px] font-bold mt-2 text-slate-800">Ordered</p>
+      </div>
+
+      <div class="relative z-10 text-center">
+        <div
+          class="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg shadow-red-100"
+        >
+          <span class="material-symbols-outlined text-sm">inventory_2</span>
+        </div>
+        <p class="text-[10px] font-bold mt-2 text-slate-800">Processing</p>
+      </div>
+
+      <div class="relative z-10 text-center">
+        <div
+          class="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center mx-auto shadow-lg shadow-red-100"
+        >
+          <span class="material-symbols-outlined text-sm">local_shipping</span>
+        </div>
+        <p class="text-[10px] font-bold mt-2 text-slate-800">Shipped</p>
+      </div>
+
+      <div class="relative z-10 text-center">
+        <div
+          class="w-10 h-10 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto"
+        >
+          <span class="material-symbols-outlined text-sm">check_circle</span>
+        </div>
+        <p class="text-[10px] font-bold mt-2 text-slate-400">Delivered</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div
+      class="md:col-span-2 bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden"
+    >
+      <div class="p-6 border-b font-bold text-slate-800">Items (3)</div>
+      <div class="divide-y divide-slate-50">
+        <div
+          *ngFor="let item of orderItems"
+          class="p-4 flex items-center gap-4"
+        >
+          <div class="w-16 h-16 bg-slate-50 rounded-2xl flex-shrink-0"></div>
+          <div class="flex-1">
+            <h4 class="text-sm font-bold text-slate-800">{{ item.name }}</h4>
+            <p class="text-xs text-slate-400">
+              Qty: {{ item.quantity }} x ฿{{ item.price | number }}
+            </p>
+          </div>
+          <div class="text-sm font-black text-slate-800">
+            ฿{{ item.quantity * item.price | number }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:col-span-1 space-y-6">
+      <div
+        class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 text-sm"
+      >
+        <h3 class="font-bold mb-4 text-slate-800">Delivery Address</h3>
+        <p class="text-slate-500 leading-relaxed italic">
+          {{ orderData?.address }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
